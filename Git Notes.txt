@@ -185,7 +185,7 @@ connected.
 
 3. Push your changes to github
 git push <remote-name> <branch-name> -->Push a particular branch of the current repository along with all it's commit history to github. Usually we push the 
-master branch, but we may push anyother branch.
+master branch, but we may push any other branch.
 Ex: git push origin master
 
 Note: 
