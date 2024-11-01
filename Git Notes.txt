@@ -1,0 +1,210 @@
+Git Bash (Git CLI) Installation:
+Use VS Code as the default text editor for git
+Let Git decide the main branch name
+Git Kraken installation (Git GUI)
+
+Commands:
+
+git config --global user.name "Ayan Saha"  --> command to set user name
+git config --global user.email "ayansaha114@gmil.com" --> command to set email
+
+git config user.name --> command to check existing username
+git config user.email --> command to check existing email
+
+ls(List) - shows a list of all files and folders present in the current directory
+start .  - Opens up the current directory in a separate window ( for mac command is open .)
+start <File Name>  - Opens up a specified file in the current directory in a separate window ( for mac command is open <File Name>  )
+pwd (print working Directory) – prints the name of the current working directory
+cd <dir name>(change Directory) – changes the current directory  to the specified directory name which is present in the current directory
+Ex: cd F:\Git here the current directory path got changed to the Git folder inside F directory
+cd .. – Moves current directory to one level back
+Command to Create files:
+touch <filename1> <filename2> ….so on – creates one or multiple files in the current directory.
+Ex: touch Test1.txt Test2.js Test3.pdf  – creates text,javascript and pdf files in the current directory.
+Also a file can be created in a particular location using touch as follows:
+touch <test_folder1>/<test_folder2>/<filename> - file will be created in test_folder2 which is present inside test_folder1 which in turn will be present in current directory.
+Note: In this case only one file can be created at a time
+Command to create a folder or directory:
+mkdir <dir_name1> <dir_name2>… so on – creates one or more folders/directories in the current directory
+mkdir <dir_name1>/<dir_name2>– creates dir_name2 in dir_name1 in the current directory
+Command to delete a file:
+rm <filename1> <filename2>… So on – rm stands for Remove. It removes one or more files permanently from the current directory.
+rm <dir_name1>/<filename> - removes the file from dir_name1 which is present in the current directory.
+Command to delete a folder or directory:
+rm –rf <dir_name1> <dir_name2>… so on - It removes one or more folders or directories permanently from the current directory.
+rm <dir_name1>/<dir_name2> - removes the dir_name2 from dir_name1 which is present in the current directory.
+Note: 
+rf where r stands for recursive and f stands for force are also called Flags in git. There are many flags in git which are associated with many commands.
+Ex: ls –a where –a is a flag of ls which stands for all files. This command lists all files in the current directory including the hidden files. Also note that all hidden file names in the output will have a 
+dot (.) at the beginning of their name.
+
+Git Repositories: A git repo is like a container for each git project which contains all the version history associated with the project. 
+Each different project has a separate git repo containing separate version histories.
+
+git init --> initiates the current working directory as a git repo. This command is executed once at the beginning of the project.
+once a folder is initialized as a git repo, a hidden .git folder is created in that directory. This hidden folder contains all our version history and if we 
+delete this hidden folder, then all our version history is lost and the working directory no longer remains a repository but behaves as a normal directory.
+
+If we initialize a directory as a git repo, then all it's sub-directories are also tracked by git.We don't need to initialize them as git repos seperately.
+Also it's not advisable to initialize a git repo inside a git repo. It's like git tracking git which creates a confusion.
+
+Git Commits:
+A git commit is like a checkpoint in Git. A commit is different from save. A file can be saved many times before commiting. Also a commit can include
+changes to a single file or a group of multiple files within the same working directory.Once a commit is done a new version is created in the .git file.
+Before commiting the file/files, it is first pushed into a commit group in staging area(a virtual space in memory) by using git add command. Once the 
+commit group is created then we can use git commit command to push the commit group from staging area to .git file.
+
+git add <filename1> <filename2> ...so on  --> command to push all required files to staging area
+ or git add . --> command to put all files in the wrking directory in the staging area
+
+git commit -m "Custom Message to highlight what this commit does"  --> command to commit the commit group from staging area to .git file as a new version.
+
+git log --> command to see all commit hitory. Each commit history will have the commit custom messages that we used.
+
+Note: git commit -a -m "Custom Message to highlight what this commit does" --> Shortcut to add all unstaged changes and commit them at the same time
+
+git commit --> instead of writing git commit -m "Custom Message to highlight what this commit does" if we just use git commit then git automatically opens its
+custom editor VIM. Using vim is difficult hence we need to change the custom editor to VS Code which is easier to use.
+
+git config --global core.editor "code --wait" --> Command to change the default text editor to VS Code. Before using git commit message use this command to
+change the text editor to VS Code.
+
+Note: why do we need git commit even though we have git commit -m?
+It's because in real time projects we may need to pass larger commit messages which cannot be passed in quotes. We need a text editor for that and hence 
+we use git commit command which opens VS code where we can write the multiline commit message.
+
+Note: Each commit message is associated with a Hex code (ex: c5291ce84bfffa34919f0334177ea093fd728131). Now in order to reduce the size of the hex code
+and to summarize the long commit messages, we use the following command:
+
+git log --oneline
+
+How to undo immediately previous commit?
+Ans: Suppose while commiting we forgot to stage a file along with other files and commit it after that, we can undo the commit by running below 
+one after another:
+
+git add <Forgotten file> --> this command stages the forgotten file
+git commit --amend --> this command undoes the previous commit and opens VS Code so that the previous commit message can be edited
+
+Doing the above steps adds the forgotten file to the previous commit and also allows us to edit the commit message. However this can be done only for the 
+previous commit not 10 to 15 commits back.
+
+Branching:
+git branch --> command to list all the current branches
+git branch <branch-name> --> command to create a new branch
+git switch <branch-name> --> command to switch to a particular branch
+git checkout <branch-name> --> this command can also switch to a particular branch but it is also used to restore working tree files (not needed for now)
+git switch -c <branch-name> --> command to create a new branch and switch to that branch at the same time
+git branch -D <branch-name> --> command to delete a branch. However you need to be in a different branch in order to delete it.
+git branch -m <renamed branch-name> --> command to rename/move(move part not needed now) a branch. However you need to be in the same branch in order to rename it.
+
+Switching branches with unstaged changes:
+
+case 1:
+If two branches are on the same commit point then even if you have some unstaged changes in one branch, you can switch your head pointer to the other branch
+
+case 2:
+However, if your branches are on two different commit points and, if you have some unstaged changes in one branch, you will not be able to switch your
+head pointer to the other branch unless you stage and commit those changes in the previous branch or stash them (stashing not yet learnt)
+
+case 3:
+Suppose we create a new file in a particular branch, and we are trying to switch to a different branch without staging that file. This time git will not give
+any error and the unstaged file will also move to the new branch. So you can stage and commit the new file in the other branch as well.
+
+However it is always recommended to stage and commit changes before switching branches.
+
+Things to keep in mind while deleting a branch:
+
+case 1:
+git branch -d <branch-name> --> This delete command for a particular branch will only work if the changes in that branch are already merged, else it won't
+
+case 2:
+git branch -D <branch-name> --> This is forced delete command. That means the branch will be deleted even if it's code is not merged.
+
+Merging: The process of combining the commits of two different branches together into a a single branch is called merging.
+
+Types of merging:
+1. Fast Forward merge: In this type of merge, a new branch is created from the master branch. Commits are made into the new branch. After that if we merge the 
+changes of new branch with master branch, such that after the merge the masterbranch head and the new branch head point to the last commit.
+
+git merge <branch-name> --> command to merge two branches.
+
+Note: Rules of merging
+1. If I want to merge the changes of branch2 with branch1, then I need to be in branch1 before using: git merge branch2
+2. If reverse happens, i.e, if I want to merge the changes of branch1 with branch2, then I need to be in branch2 before using: git merge branch1
+
+2. Other types of merging: Here say we are at a parent branch commit. From there I create two seperate branches b1 an b2 and each branch have their own
+commit history. If we merge b1 and b2 then it is not a fast forward branch as parent branch header will not change in this case.
+Also this type of merging can result in a merge conflict, which need to be resolved before merging. However the rules of merging will remain the same.
+
+Cloning:
+Cloning a github repository(or any other non-github repo) into your local system from the web:
+ 
+Suppose you are in a folder called Clone in your local system and you want to clone a github repository called myClone from github
+(or any other non-github repo) into Clone folder, use command:
+ 
+git clone <repo-link> --> this command will create another folder called myClone in Clone folder and initiate it as a git repository in our local 
+system. Also we will get full commit history( or version history) of that repository.
+ 
+Note: This command will work only if the repository you want to clone is public.
+ 
+GITHUB:
+SSH(Secure Shell) Key:
+While working with github you need to be authenticated each time for performing certain jobs like pushing code from local repo etc. For this the git 
+terminal would prompt every time for Github Email and Password. To prevent this we need to generte and configure an SSH Key, once configured you can 
+connect to github without using username/password. Steps to create SSH keys are as follows:
+ 
+1. Open Git Bash
+2. Enter command ls -al ~/.ssh to see if existing SSH keys are present
+ 
+The above command lists the files in your .ssh directory, if they exist.By default, the filenames of supported public keys for GitHub are one of the 
+following:
+id_rsa.pub
+id_ecdsa.pub
+id_ed25519.pub
+ 
+On the other hand if you receive an error that ~/.ssh doesn't exist, then that means you do not have an existing SSH key pair.
+has context menu
+
+
+How to upload code on Github or how to send your local repository code to a repository hosted in Github?
+
+Option 1:
+1. Create a new repo on github
+2. Connect your local repo (add a remote) --> a remote is like a key which helps us to connect local repo with github repo
+git remote add <name> <repo-url> --> command to create a remote
+Ex: git remote add origin https://github.com/CrispCodes/github-demo-repo
+This means origin is a name/reference to the github repo url. Whenever we are referring origin, we are actually referring to the repo url. Also note origin 
+is a standard repo name, instead of origin we can use any other name as well. But most people keep it as origin.
+
+git remote rename <old name> <new name> --> command to rename remote
+git remote remove <name> --> command to remove a remote
+
+Note: git remote --> command to see if your repo already has a remote associated with it or not.
+git remote -v --> this is similar to the above command only difference is, this command also shows the name of the github repo with which the remote is
+connected.
+
+3. Push your changes to github
+git push <remote-name> <branch-name> -->Push a particular branch of the current repository along with all it's commit history to github. Usually we push the 
+master branch, but we may push anyother branch.
+Ex: git push origin master
+
+Note: 
+1. In order to push a branch from a local repo, it is not mandatory to be on that branch
+2. It is seen when we create a github repo, initially no brach is present there. A branch in github is created only when we push a particular branch from our 
+local repo to github using command git push <repo name> <branch name>. Also while using the push command, if the branch which we are pushing is already 
+present in github then new commits will be pushed under that branch name, but if that branch is not present then a new branch will be created in github with
+that branch name.
+3. We can also push a local branch to an already present github branch of different name using below command:
+git push <remote name> <local branch name>:<remote branch name>
+4. We use git push <remote-name> <branch-name> whenever we make new commits in a branch. However if we use git push -u <remote-name> <branch-name> instead
+(where u stands for upstream), next time when we make any new commits in our local branch, we can push the changes to github by just using command git push.
+However in this approach we need to be in the branch from where we have set the upstream for it to work.
+5. git push -u <remote name> <local branch name>:<remote branch name>  --> upstream command for pushing to some different branch name in github
+(Point number 5 is usually not recommended)
+
+Option 2:
+1. Create a repo on github
+2. Clone it down to your machine --> if we clone a repository it's remote will be created automatically with name origin by default
+3. Start working with that repo locally and then push up your changes to github repo
+
+Note: All rules and commands applicable to Option 1 is also applicable here.
